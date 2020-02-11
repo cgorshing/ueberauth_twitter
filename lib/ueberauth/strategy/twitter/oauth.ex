@@ -10,6 +10,8 @@ defmodule Ueberauth.Strategy.Twitter.OAuth do
     redirect_uri: System.get_env("TWITTER_REDIRECT_URI")
   """
 
+  require Logger
+
   alias Ueberauth.Strategy.Twitter.OAuth.Internal
 
   @defaults [access_token: "/oauth/access_token",
@@ -52,6 +54,8 @@ defmodule Ueberauth.Strategy.Twitter.OAuth do
 
   def client(opts \\ []) do
     config = Application.get_env(:ueberauth, __MODULE__)
+
+    Logger.error("*** This is what we have #{inspect config}")
 
     @defaults
     |> Keyword.merge(config)
